@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MScIT Mid-Semester Readiness Poll</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3a0ca3;
+            --accent: #f72585;
+            --success: #4cc9f0;
+            --warning: #f8961e;
+            --danger: #e63946;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gradient: linear-gradient(135deg, #4361ee, #3a0ca3);
+            --gradient-light: linear-gradient(135deg, #4cc9f0, #4361ee);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+            color: var(--dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+            animation: fadeIn 1s ease;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .tagline {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .intro {
+            background: var(--gradient-light);
+            color: white;
+            text-align: center;
+        }
+        
+        .question {
+            border-left: 5px solid var(--primary);
+        }
+        
+        .question h3 {
+            margin-bottom: 15px;
+            color: var(--secondary);
+            display: flex;
+            align-items: center;
+        }
+        
+        .question-number {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 30px;
+            height: 30px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 50%;
+            margin-right: 10px;
+            font-size: 0.9rem;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        
+        .option:hover {
+            background: rgba(67, 97, 238, 0.05);
+            border-color: rgba(67, 97, 238, 0.2);
+        }
+        
+        .option input {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .emoji {
+            font-size: 1.3em;
+            margin-right: 8px;
+        }
+        
+        .checkbox-options {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 12px;
+        }
+        
+        .checkbox-option {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .checkbox-option:hover {
+            border-color: var(--primary);
+            background: rgba(67, 97, 238, 0.05);
+        }
+        
+        .checkbox-option input {
+            margin-right: 10px;
+            transform: scale(1.2);
+        }
+        
+        .submit-btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            background: var(--gradient);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.3);
+        }
+        
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(67, 97, 238, 0.4);
+        }
+        
+        .note {
+            margin-top: 20px;
+            padding: 15px;
+            background: #fff8e1;
+            border-left: 5px solid var(--warning);
+            border-radius: 10px;
+        }
+        
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            color: var(--dark);
+            opacity: 0.7;
+            font-size: 0.9em;
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+        
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: #d4edda;
+            color: #155724;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            margin-bottom: 20px;
+            border-left: 5px solid #28a745;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .checkbox-options {
+                grid-template-columns: 1fr;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-poll"></i> MScIT Readiness Poll</h1>
+            <p class="tagline">Share your feedback to help us support you better</p>
+        </header>
+        
+        <!-- Success Message (Hidden by default) -->
+        <div class="success-message" id="successMessage">
+            <h3><i class="fas fa-check-circle"></i> Thank You!</h3>
+            <p>Your responses have been submitted successfully. We appreciate your feedback!</p>
+        </div>
+        
+        <!-- Student Poll Section -->
+        <div class="card intro">
+            <h2>Mid-Semester Readiness Assessment</h2>
+            <p>As we prepare for the upcoming mid-semester exams (in 2 weeks), we'd like to know how prepared you feel with the evening courses so far. Your honest responses will help us identify challenges and find ways to support one another.</p>
+            <p><i class="fas fa-info-circle"></i> <strong>Please answer all questions below. For specific issues, message the class rep privately.</strong></p>
+        </div>
+        
+        <!-- REPLACE YOUR-EMAIL@EXAMPLE.COM WITH YOUR ACTUAL EMAIL -->
+        <form id="readinessPoll" action="https://formsubmit.co/your-email@example.com" method="POST">
+            <!-- Add these hidden fields for FormSubmit configuration -->
+            <input type="hidden" name="_subject" value="New MScIT Poll Response">
+            <input type="hidden" name="_template" value="table">
+            <input type="hidden" name="_captcha" value="false">
+            <input type="hidden" name="_next" value="#successMessage">
+            
+            <!-- Question 1 -->
+            <div class="card question">
+                <h3><span class="question-number">1</span> How prepared do you currently feel for the mid-sem exams?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="preparedness" value="✅ Very prepared" required>
+                        <span class="emoji">✅</span> Very prepared
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="preparedness" value="⚠️ Not well prepared">
+                        <span class="emoji">⚠️</span> Not well prepared
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="preparedness" value="❌ Not prepared at all">
+                        <span class="emoji">❌</span> Not prepared at all
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Question 2 -->
+            <div class="card question">
+                <h3><span class="question-number">2</span> Do you feel the pace and coverage of the courses so far has been enough for you to attempt the exams confidently?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="pace-coverage" value="👍 Yes" required>
+                        <span class="emoji">👍</span> Yes
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="pace-coverage" value="👎 No">
+                        <span class="emoji">👎</span> No
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="pace-coverage" value="🤔 Not sure">
+                        <span class="emoji">🤔</span> Not sure
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Question 3 -->
+            <div class="card question">
+                <h3><span class="question-number">3</span> Which of the following challenges are affecting your readiness? (choose all that apply)</h3>
+                <div class="checkbox-options">
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="challenges" value="⏰ Limited study time (due to work/professional commitments)">
+                        <span class="emoji">⏰</span> Limited study time (due to work/professional commitments)
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="challenges" value="📚 Difficulty understanding some course materials">
+                        <span class="emoji">📚</span> Difficulty understanding some course materials
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="challenges" value="👩‍🏫 Need more guidance/clarity from instructors">
+                        <span class="emoji">👩‍🏫</span> Need more guidance/clarity from instructors
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="challenges" value="🤝 Lack of study group/support">
+                        <span class="emoji">🤝</span> Lack of study group/support
+                    </label>
+                    <label class="checkbox-option">
+                        <input type="checkbox" name="challenges" value="📝 Other (please specify to the class rep privately)">
+                        <span class="emoji">📝</span> Other (please specify to the class rep privately)
+                    </label>
+                </div>
+            </div>
+            
+            <!-- Question 4 -->
+            <div class="card question">
+                <h3><span class="question-number">4</span> Would you like extra support (e.g., revision session, study group, sharing of materials) before the exams?</h3>
+                <div class="options">
+                    <label class="option">
+                        <input type="radio" name="extra-support" value="👍 Yes" required>
+                        <span class="emoji">👍</span> Yes
+                    </label>
+                    <label class="option">
+                        <input type="radio" name="extra-support" value="👎 No">
+                        <span class="emoji">👎</span> No
+                    </label>
+                </div>
+            </div>
+            
+            <button type="submit" class="submit-btn pulse"><i class="fas fa-paper-plane"></i> Submit Your Responses</button>
+        </form>
+        
+        <div class="card note">
+            <p><i class="fas fa-exclamation-circle"></i> <strong>Note:</strong> If you feel strongly unprepared, or you have a personal issue affecting your readiness, please inbox the class rep directly with details.</p>
+        </div>
+        
+        <footer>
+            <p>MScIT Class Representative - Mid-Semester Readiness Poll © 2023</p>
+        </footer>
+    </div>
+
+    <script>
+        // Simple JavaScript to show success message after form submission
+        document.getElementById('readinessPoll').addEventListener('submit', function() {
+            // This will run before the form is actually submitted
+            setTimeout(function() {
+                document.getElementById('successMessage').style.display = 'block';
+                window.scrollTo(0, 0);
+            }, 100);
+        });
+        
+        // Add a confirmation dialog before submitting
+        document.getElementById('readinessPoll').addEventListener('submit', function(e) {
+            if (!confirm('Are you sure you want to submit your responses? You cannot change them after submission.')) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+</html>
